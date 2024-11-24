@@ -20,9 +20,9 @@ end
 
 notify("")
 
-local CustomConfig = LIB("Combat", {
-    Name = "",
-    Function = function(callback) 
+local TexturePack = LIB("Combat", {
+    Name = "TexturePack",
+    Function = function(val) 
         if callback then
 		notify("Coming Soon..")
         end
