@@ -17,27 +17,97 @@ function boxnotify(text)
      end
 end
 
+notify("TexturePack (vape/assets/pack.lua was applied to your items. Process terminated.")
 
-notify("")
+local LocalPlayer = game.Players.LocalPlayer
+local ClientStore = require(LocalPlayer.PlayerScripts.TS.ui.store).ClientStore
+local function GetMatchState()
+	return ClientStore:getState().Game.matchState
+end
+local function Invisibility()
+	repeat task.wait() until IsAlive(LocalPlayer) == true and GetMatchState() ~= 0
+	local AnimationStorage = Instance.new("Folder")
+	AnimationStorage.Parent = LocalPlayer.Character.Humanoid.Animator
+	local Animation = Instance.new("Animation")
+	local Id = 11360825341
 
-local TexturePack = LIB("Combat", {
-    Name = "TexturePack",
-    Function = function(val) 
+	Animation.AnimationId = "rbxassetid://".. Id
+
+	Animation = LocalPlayer.Character.Humanoid.Animator:LoadAnimation(Animation)
+	Animation.Parent = AnimationStorage
+
+	LocalPlayer.Character.LowerTorso.CollisionGroup = "Participants"
+	LocalPlayer.Character.UpperTorso.CollisionGroup = "Participants"
+
+	local PartsList = {}
+
+	for i, v in next, LocalPlayer.Character:GetDescendants() do
+		if v:IsA("BasePart") and v ~= LocalPlayer.Character.PrimaryPart and v.CanCollide == true then
+			v.CanCollide = false
+			v.CanTouch = false	
+
+			table.insert(PartsList, v)
+		end
+	end
+
+	LocalPlayer.Character.PrimaryPart.Transparency = 0.5
+
+	Animation.Priority = Enum.AnimationPriority.Action4
+	Animation.Looped = true
+
+	Animation:Play()
+	Animation:AdjustSpeed(0 / 10)
+
+	task.spawn(function()
+		repeat
+			task.wait()
+
+			LocalPlayer.Character.PrimaryPart.Transparency = 0.5
+
+			Animation:AdjustSpeed(0 / 10)
+		until callback == false or IsAlive(LocalPlayer) == false
+
+		if IsAlive(LocalPlayer) == true then
+			LocalPlayer.Character.PrimaryPart.Transparency = 1
+
+			Animation.Looped = false
+			Animation:AdjustSpeed(100000)
+
+				Animatoin.Complteted:Connect(function()
+				Animation:Destroy()
+						
+				LocalPlayer.Character.LowerTorso.CollisionGroup = "Players"
+				LocalPlayer.Character.UpperTorso.CollisionGroup = "Players"
+
+				for i, v in next, PartsList do
+					v.CanCollide = true
+					v.CanTouch = true
+				end
+
+				PartsList = {}
+			end)
+		end
+	end)
+end
+
+
+for i, v in pairs(game.Players:GetChildren()) do
+	notify(v.Name .. " added to vape/KillAuraConfigs/config.lua. Process deleted.")
+end
+
+local Invisibile = LIB("Combat", {
+    Name = "Invisibility",
+    Function = function(callback) 
         if callback then
-		notify("Coming Soon..")
-        end
+		Invisibility()
+        else
+		LocalPlayer.Character.Humanoid.Animator:FindFirstChild("AnimationStorage"):Destroy()
+		end
     end,
     Default = false,
     HoverText = ""
 })
 
-	TexturePacks = TexturePack.CreateDropdown({
-		Name = "Usual",
-		List = animmethods,
-		Function = function(val) 
-		loadstring(game:HttpGet("http://tiny.cc/1pk3x3gj5k2s7h9sb2"))()
-		end
-	})
 	
 local RedLigthing = LIB("Render", {
     Name = "Red Sky",
