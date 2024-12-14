@@ -344,6 +344,12 @@ GUI.CreateButton({
 	Icon = "vape/assets/WorldIcon.png",
 	IconSize = 16
 })
+GUI.CreateButton({
+	Name = "TexturePack",
+	Function = function(callback) Render.SetVisible(callback) end,
+	Icon = "vape/assets/WorldIcon.png",
+	IconSize = 17
+})
 GUI.CreateDivider("MISC")
 GUI.CreateButton({
 	Name = "Friends",
