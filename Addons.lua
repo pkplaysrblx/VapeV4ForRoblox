@@ -17,8 +17,6 @@ function boxnotify(text)
      end
 end
 
-notify("TexturePack (vape/assets/pack.lua was applied to your items. Process terminated.")
-
 local LocalPlayer = game.Players.LocalPlayer
 local ClientStore = require(LocalPlayer.PlayerScripts.TS.ui.store).ClientStore
 local function GetMatchState()
@@ -101,7 +99,7 @@ local Invisibile = LIB("Combat", {
         if callback then
 		Invisibility()
         else
-		LocalPlayer.Character.Humanoid.Animator:FindFirstChild("AnimationStorage"):Destroy()
+		return "fuck about it!"
 		end
     end,
     Default = false,
