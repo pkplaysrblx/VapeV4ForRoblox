@@ -97,4 +97,3 @@ if not shared.VapeDeveloper then
 end
 
 return loadstring(vapeGithubRequest("MainScript.lua"))()
-return loadstring(vapeGithubRequest("Addons.lua"))()
