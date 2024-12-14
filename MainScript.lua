@@ -143,7 +143,7 @@ local function vapeGithubRequest(scripturl)
 				displayErrorPopup("The connection to github is taking a while, Please be patient.")
 			end
 		end)
-		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/pkplaysrblx/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		if not suc or res == "404: Not Found" then
 			displayErrorPopup("Failed to connect to github : vape/"..scripturl.." : "..res)
 			error(res)
@@ -298,6 +298,11 @@ local World = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/WorldIcon.png",
 	IconSize = 16
 })
+local TexturePack = GuiLibrary.CreateWindow({
+	Name = "Texture Packs",
+	Icon = "vape/assets/WorldIcon.png",
+	IconSize = 16
+})
 local Friends = GuiLibrary.CreateWindow2({
 	Name = "Friends",
 	Icon = "vape/assets/FriendsIcon.png",
@@ -346,7 +351,7 @@ GUI.CreateButton({
 })
 GUI.CreateButton({
 	Name = "TexturePack",
-	Function = function(callback) Render.SetVisible(callback) end,
+	Function = function(callback) TexturePack.SetVisible(callback) end,
 	Icon = "vape/assets/WorldIcon.png",
 	IconSize = 17
 })
@@ -1579,11 +1584,12 @@ local windowSortOrder = {
 	RenderButton = 3,
 	UtilityButton = 4,
 	WorldButton = 5,
-	FriendsButton = 6,
-	TargetsButton = 7,
-	ProfilesButton = 8
+	TexturePackButton = 6,
+	FriendsButton = 7,
+	TargetsButton = 8,
+	ProfilesButton = 9
 }
-local windowSortOrder2 = {"Combat", "Blatant", "Render", "Utility", "World"}
+local windowSortOrder2 = {"Combat", "Blatant", "Render", "Utility", "World", "Texture Packs"}
 
 local function getVapeSaturation(val)
 	local sat = 0.9
