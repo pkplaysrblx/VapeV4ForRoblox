@@ -1,6 +1,3 @@
---[[ 
-a
-]]
 local GuiLibrary = shared.GuiLibrary
 local players = game:GetService("Players")
 local textservice = game:GetService("TextService")
@@ -10792,6 +10789,34 @@ runcode(function()
 				connection = lplr.CharacterAdded:Connect(newchar)
 			end
 		end
+	})
+end)
+
+runcode(function()
+	local JellyfishExploit = {["Enabled"] = false}
+	JellyfishExploit = GuiLibrary["ObjectsThatCanBeSaved"]["CombatWindow"]["Api"].CreateOptionsButton({
+		Name = "MarinaJellyfishExploit",
+		Function = function(callback)
+			if callback then
+				if store.equippedKit == "marina" then
+					task.spawn(function()
+						if not bedwars.AbilityController:canUseAbility("electrify_jellyfish") then
+							repeat task.wait() until bedwars.AbilityController:canUseAbility("electrify_jellyfish") or not JellyfishExploit.Enabled
+							task.wait(0.1)
+						end
+						if bedwars.AbilityController:canUseAbility("electrify_jellyfish") then
+							repeat task.wait(0.1)
+								bedwars.AbilityController:useAbility("electrify_jellyfish")
+							until not JellyfishExploit.Enabled
+						end
+					end)
+				else
+					warningNotification("Vape", "You need to be in a match with Marina to use this ability", 4)
+					JellyfishExploit.ToggleButton(false)
+				end
+			end
+		end, 
+		HoverText = "Requires Marina kit to use"
 	})
 end)
 
