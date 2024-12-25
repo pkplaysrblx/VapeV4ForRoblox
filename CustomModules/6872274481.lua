@@ -10811,7 +10811,7 @@ runcode(function()
 						end
 					end)
 				else
-					warningNotification("Vape", "You need to be in a match with Marina to use this ability", 4)
+					createwarning("Vape", "You have to be in a match and Marina kit equipped!", 4)
 					JellyfishExploit.ToggleButton(false)
 				end
 			end
