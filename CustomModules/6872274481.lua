@@ -10820,6 +10820,25 @@ runcode(function()
 	})
 end)
 
+run(function()
+    local HostPanel = {Enabled = false}
+	HostPanel = GuiLibrary["ObjectsThatCanBeSaved"]["WorldWindow"]["Api"].CreateOptionsButton({
+		Name = "HostPanelExploit",
+		HoverText = "Allows you to get host-panel client-sided",
+        Function = function(callback)
+            if callback then
+                task.spawn(function()
+					lplr:SetAttribute("CustomMatchRole", "host")
+				end)
+			else
+				task.spawn(function()
+					lplr:SetAttribute("CustomMatchRole", "player")
+				end)
+			end
+		end
+	})
+end)
+
 task.spawn(function()
 	local url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/CustomModules/bedwarsdata"
 
