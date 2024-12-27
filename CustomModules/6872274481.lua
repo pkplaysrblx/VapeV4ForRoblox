@@ -10792,53 +10792,6 @@ runcode(function()
 	})
 end)
 
-runcode(function()
-	local JellyfishExploit = {["Enabled"] = false}
-	JellyfishExploit = GuiLibrary["ObjectsThatCanBeSaved"]["CombatWindow"]["Api"].CreateOptionsButton({
-		Name = "MarinaJellyfishExploit",
-		Function = function(callback)
-			if callback then
-				if store.equippedKit == "marina" then
-					task.spawn(function()
-						if not bedwars.AbilityController:canUseAbility("electrify_jellyfish") then
-							repeat task.wait() until bedwars.AbilityController:canUseAbility("electrify_jellyfish") or not JellyfishExploit.Enabled
-							task.wait(0.1)
-						end
-						if bedwars.AbilityController:canUseAbility("electrify_jellyfish") then
-							repeat task.wait(0.1)
-								bedwars.AbilityController:useAbility("electrify_jellyfish")
-							until not JellyfishExploit.Enabled
-						end
-					end)
-				else
-					createwarning("Vape", "You have to be in a match and Marina kit equipped!", 4)
-					JellyfishExploit.ToggleButton(false)
-				end
-			end
-		end, 
-		HoverText = "Requires Marina kit to use"
-	})
-end)
-
-run(function()
-    local HostPanel = {Enabled = false}
-	HostPanel = GuiLibrary["ObjectsThatCanBeSaved"]["WorldWindow"]["Api"].CreateOptionsButton({
-		Name = "HostPanelExploit",
-		HoverText = "Allows you to get host-panel client-sided",
-        Function = function(callback)
-            if callback then
-                task.spawn(function()
-					lplr:SetAttribute("CustomMatchRole", "host")
-				end)
-			else
-				task.spawn(function()
-					lplr:SetAttribute("CustomMatchRole", "player")
-				end)
-			end
-		end
-	})
-end)
-
 task.spawn(function()
 	local url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/CustomModules/bedwarsdata"
 
